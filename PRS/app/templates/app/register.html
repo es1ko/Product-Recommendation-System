@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} Sign up {% endblock title %}
+
+{% block main-content %}
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <h3 class="text-center">Registration</h3>
+            <hr>
+
+            <form action="{% url 'register' %}" method="post" novalidate class="shadow p-5">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if 'registration' in message.tags %}
+                            {% if 'success' in message.tags %}
+                                <p class="alert alert-success my-3">{{ message }}</p>
+                            {% elif 'warning' in message.tags %}
+                                <p class="alert alert-warning my-3">{{ message }}</p>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <input type="submit" value="Sign Up" class="btn btn-primary"> <br>
+
+                <div class="text-center text-primary fw-bold">
+                    <small>Already have an account ?
+                        <a href="{% url 'login' %}" class="text-danger">Sign in <now></now></a>
+                    </small>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

@@ -1,0 +1,22 @@
+html, body{
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.account-button {
+    margin-right: 70px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.footer {
+  flex-shrink: 0;
+}

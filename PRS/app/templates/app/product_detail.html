@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} Product Detail - {{ product.model }} {% endblock title %}
+
+{% block main-content %}
+<div class="container">
+    <h1>{{ product.brand_name }} {{ product.model }}</h1>
+    <p>Price: {{ product.price }} RUB</p>
+    <p>Avg Rating: {{ product.avg_rating }}</p>
+    <p>Is 5G: {{ product.is_5G }}</p>
+    <p>Processor: {{ product.processor_brand }} ({{ product.num_cores }} Cores, {{ product.processor_speed }} GHz)</p>
+    <p>Battery Capacity: {{ product.battery_capacity }} mAh</p>
+    <p>RAM: {{ product.ram_capacity }} GB</p>
+    <p>Internal Memory: {{ product.internal_memory }} GB</p>
+    <p>Screen Size: {{ product.screen_size }} inches</p>
+    <p>Refresh Rate: {{ product.refresh_rate }} Hz</p>
+    <p>Number of Rear Cameras: {{ product.num_rear_cameras }}</p>
+    <p>Operating System: {{ product.os }}</p>
+    <p>Primary Rear Camera: {{ product.primary_camera_rear }}</p>
+    <p>Primary Front Camera: {{ product.primary_camera_front }}</p>
+    <p>Extended Memory Available: {{ product.extended_memory_available }}</p>
+    <p>Resolution: {{ product.resolution_width }}x{{ product.resolution_height }}</p>
+
+    <a href="#" class="btn btn-primary">Add to Cart</a>
+    <button class="btn btn-outline-danger like-button"><i class="fas fa-heart"></i></button>
+</div>
+{% endblock main-content %}

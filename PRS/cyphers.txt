@@ -1,0 +1,62 @@
+LOAD CSV WITH HEADERS FROM 'file:///smartphones.csv' AS row
+CREATE (:Product {properties: row.properties});
+
+LOAD CSV WITH HEADERS FROM 'file:///users.csv' AS row
+CREATE (:User {properties: row.properties});
+
+MATCH (u:User)
+WHERE ID(u) >= 202 AND ID(u) <= 211
+WITH u
+LIMIT 10
+MATCH (p:Product {brand_name: 'apple'})
+WITH u, COLLECT(p) AS appleProducts
+WITH u, apoc.coll.shuffle(appleProducts) AS shuffledProducts
+UNWIND RANGE(0, 9) AS i
+WITH u, shuffledProducts[i] AS product
+CREATE (u)-[:VIEWS]->(product);
+
+MATCH (u:User)
+WHERE ID(u) >= 212 AND ID(u) <= 231
+WITH u
+LIMIT 10
+MATCH (p:Product {brand_name: 'samsung'})
+WITH u, COLLECT(p) AS appleProducts
+WITH u, apoc.coll.shuffle(appleProducts) AS shuffledProducts
+UNWIND RANGE(0, 19) AS i
+WITH u, shuffledProducts[i] AS product
+CREATE (u)-[:VIEWS]->(product);
+
+MATCH (u:User)
+WHERE ID(u) >= 232 AND ID(u) <= 251
+WITH u
+LIMIT 10
+MATCH (p:Product {brand_name: 'xiaomi'})
+WITH u, COLLECT(p) AS appleProducts
+WITH u, apoc.coll.shuffle(appleProducts) AS shuffledProducts
+UNWIND RANGE(0, 19) AS i
+WITH u, shuffledProducts[i] AS product
+CREATE (u)-[:VIEWS]->(product);
+
+MATCH (u:User)
+WHERE ID(u) >= 202 AND ID(u) <= 211
+WITH u
+LIMIT 7
+MATCH (p:Product {brand_name: 'apple'})
+WITH u, COLLECT(p) AS appleProducts
+WITH u, apoc.coll.shuffle(appleProducts) AS shuffledProducts
+UNWIND RANGE(0, TOINTEGER(ROUND(rand() * 2 + 1))) AS i
+WITH u, shuffledProducts[i] AS product
+CREATE (u)-[:LIKES]->(product);
+
+MATCH (u:User)
+WHERE ID(u) >= 232 AND ID(u) <= 251
+WITH u
+LIMIT 10
+MATCH (p:Product {brand_name: 'xiaomi'})
+WITH u, COLLECT(p) AS appleProducts
+WITH u, apoc.coll.shuffle(appleProducts) AS shuffledProducts
+UNWIND RANGE(0, TOINTEGER(ROUND(rand() * 2 + 1))) AS i
+WITH u, shuffledProducts[i] AS product
+CREATE (u)-[:LIKES]->(product);
+
+
